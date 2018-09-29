@@ -7,6 +7,10 @@ class General{
         $this->db = $database;
     }
 
+    public function url(){
+        return 'http://localhost/weblog';
+    }
+
     public function tglIndo($tanggal){
         $bulan = array(
             1 => 'Jan',
@@ -85,5 +89,50 @@ class General{
             echo '</div>';
         }
     } 
+
+    public function includeHeader(){
+        include 'layouts/header.php';
+    }
+
+    public function includeFooter(){
+        include 'layouts/footer.php';
+    }
+
+    public function breadcrumb($sub1=null, $query=null){
+
+        if($sub1 != null && $query != null){
+            $sub2 = $this->db->prepare($query);
+            $sub2->execute();
+            $sub2 = $sub2->fetch(PDO::FETCH_OBJ);
+            $judul = $sub2->judul;
+            echo '
+            <div class="col-md-12" style="margin-left: 0; padding-left: 0">
+                <nav aria-label="breadcrumb" >
+                  <ol class="breadcrumb" style="background: #fff; margin-top: 20px;">
+                    <li class="breadcrumb-item"><a href=" ' . $this->url() . ' ">Home</a></li>
+                    <li class="breadcrumb-item"><a href=" ' . $sub1 . '.php ">' . ucfirst($sub1) . '</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">' . $judul . '</li>
+                  </ol>
+                </nav>
+            </div>
+            ';
+        }
+
+        if($sub1 != null && $query == null){
+            echo '
+            <div class="col-md-12" style="margin-left: 0; padding-left: 0">
+                <nav aria-label="breadcrumb" >
+                  <ol class="breadcrumb" style="background: #fff; margin-top: 20px;">
+                    <li class="breadcrumb-item"><a href=" ' . $this->url() . ' ">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">' . ucfirst($sub1) . '</li>
+                  </ol>
+                </nav>
+            </div>
+            ';
+
+        }
+
+    }
+
 }
 ?>

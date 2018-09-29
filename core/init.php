@@ -14,6 +14,7 @@ spl_autoload_register('myAutoload');
 try{
     $general = new General($db);
     $index = new Index($db);
+    $index = new Post($db);
 }
 catch(Exception $e){
     echo 'Caught Exception ', $e->getMessage();

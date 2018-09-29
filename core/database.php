@@ -3,7 +3,7 @@ $config = array(
     'host'     => 'localhost',
     'username' => 'root',
     'password' => '',
-    'dbname'  => 'blog'
+    'dbname'  => 'weblog'
 );
 
 $db = new PDO('mysql:host=' . $config['host'] . ';dbname=' . $config['dbname'], $config['username'], $config['password']);
